@@ -1,15 +1,15 @@
 package com.sujeet.brainbuster.service;
 
 import com.sujeet.brainbuster.dao.IQuestionRepo;
+import com.sujeet.brainbuster.exception.QuestionNotFoundError;
 import com.sujeet.brainbuster.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class QuestionService implements IQuestionService{
+public class QuestionServiceImpl implements IQuestionService{
 
     @Autowired
     private IQuestionRepo repo;
@@ -37,14 +37,14 @@ public class QuestionService implements IQuestionService{
 
     @Override
     public String deleteQuestionById(int id) {
-        Optional<Question> optional = repo.findById(id);
-        optional.ifPresent(question -> repo.delete(question));
+        Question question = repo.findById(id).orElseThrow(() -> new QuestionNotFoundError("Question not Found"));
+        repo.delete(question);
         return "Question deleted successfully with id: " + id;
     }
 
     @Override
-    public String updateTheQuestion(Integer id, Question question) {
-        Question dbQuestion = repo.findById(id).orElseThrow(() -> new RuntimeException("Question not Found"));
+    public String updateTheQuestion(Integer id, Question question){
+        Question dbQuestion = repo.findById(id).orElseThrow(() -> new QuestionNotFoundError("Question not Found"));
         dbQuestion.setQuestion(question.getQuestion());
         dbQuestion.setDifficulty(question.getDifficulty());
         dbQuestion.setOption1(question.getOption1());
@@ -59,7 +59,7 @@ public class QuestionService implements IQuestionService{
 
     @Override
     public String updateAnsById(Integer id, String answer) {
-        Question dbQuestion = repo.findById(id).orElseThrow(() -> new RuntimeException("Question not Found"));
+        Question dbQuestion = repo.findById(id).orElseThrow(() -> new QuestionNotFoundError("Question not Found"));
         dbQuestion.setRightAnswer(answer);
         repo.save(dbQuestion);
         return "Answer for question updated successfully with id: " + id;

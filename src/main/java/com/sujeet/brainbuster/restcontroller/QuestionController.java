@@ -26,13 +26,13 @@ public class QuestionController {
     @PostMapping("addquestion")
     public ResponseEntity<String> addQuestion(@RequestBody Question question) {
         String msg = service.addQuestion(question);
-        return new ResponseEntity<String>(msg, HttpStatus.ACCEPTED);
+        return new ResponseEntity<String>(msg, HttpStatus.CREATED);
     }
 
     @PostMapping("addallquestion")
     public ResponseEntity<String> addAllQuestion(@RequestBody Iterable<Question> questions) {
         String msg = service.addAllQuestion(questions);
-        return new ResponseEntity<String>(msg, HttpStatus.ACCEPTED);
+        return new ResponseEntity<String>(msg, HttpStatus.CREATED);
     }
 
     @GetMapping("/category/{category}")
@@ -44,13 +44,13 @@ public class QuestionController {
     @PutMapping("updatequestion/{id}")
     public ResponseEntity<String> updateQuestion(@PathVariable Integer id, @RequestBody Question question) {
         String msg = service.updateTheQuestion(id, question);
-        return new ResponseEntity<>(msg, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(msg, HttpStatus.CREATED);
     }
 
     @PatchMapping("updateanswer/{id}/{answer}")
     public ResponseEntity<String> updateAnswerById(@PathVariable Integer id, @PathVariable String answer) {
         String msg = service.updateAnsById(id, answer);
-        return new ResponseEntity<>(msg, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(msg, HttpStatus.CREATED);
     }
 
 
