@@ -5,6 +5,7 @@ import com.sujeet.brainbuster.dao.IQuizRepo;
 import com.sujeet.brainbuster.model.Question;
 import com.sujeet.brainbuster.model.QuestionWrapper;
 import com.sujeet.brainbuster.model.Quiz;
+import com.sujeet.brainbuster.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +44,20 @@ public class QuizServiceImpl implements IQuizService {
             questionForUser.add(questionWrapper);
         }
         return questionForUser;
+    }
+
+    @Override
+    public String calculateResult(Integer id, List<Response> resp) {
+        Quiz q = quizRepo.findById(id).get();
+        List<Question> questions = q.getQuestions();
+        int right = 0;
+        int increment = 0;
+        for (Response response : resp) {
+            if(response.getResponse().equals(questions.get(increment).getRightAnswer()))
+                right++;
+
+            increment++;
+        }
+        return "Correct Answers: " + right;
     }
 }
