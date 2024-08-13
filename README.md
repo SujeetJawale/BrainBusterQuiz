@@ -8,34 +8,43 @@ handling, further improving code modularity and reusability.
 This is a monolithic application organized under the package com.sujeet.brainbuster. The project follows a layered architecture with clearly defined modules, as described below:
 
 ### 1. RestController
-QuestionController: REST controller for managing Question-related operations like creation, retrieval, updating, and deletion.
-QuizController: REST controller for managing Quiz-related operations including creation, retrieval, and handling quizzes.
+*QuestionController:* REST controller for managing Question-related operations like creation, retrieval, updating, and deletion.
+
+*QuizController:* REST controller for managing Quiz-related operations including creation, retrieval, and handling quizzes.
 
 ### 2. Service
-IQuestionService: Interface defining business logic operations for Question entities.
-IQuizService: Interface defining business logic operations for Quiz entities.
-QuestionServiceImpl: Implementation of IQuestionService, containing the core business logic for Question management.
-QuizServiceImpl: Implementation of IQuizService, handling the core business logic for Quiz management.
+*IQuestionService:* Interface defining business logic operations for Question entities.
+
+*IQuizService:* Interface defining business logic operations for Quiz entities.
+
+*QuestionServiceImpl:* Implementation of IQuestionService, containing the core business logic for Question management.
+
+*QuizServiceImpl:* Implementation of IQuizService, handling the core business logic for Quiz management.
 
 ### 3. DAO (Data Access Object)
-IQuestionRepo: Interface for Question entity repository, handling CRUD operations and custom queries.
-IQuizRepo: Interface for Quiz entity repository, managing CRUD operations and custom queries.
+*IQuestionRepo:* Interface for Question entity repository, handling CRUD operations and custom queries.
+
+*IQuizRepo:* Interface for Quiz entity repository, managing CRUD operations and custom queries.
 
 ### 4. Model
-ErrorDetails: Model class representing the structure of error responses.
-Question: Entity class representing a Question in the system.
-QuestionWrapper: Helper class to wrap a collection of Question objects.
-Quiz: Entity class representing a Quiz which is composed of multiple Question objects.
-Response: Model class to encapsulate responses from the REST API
+*ErrorDetails:* Model class representing the structure of error responses.
+
+*Question:* Entity class representing a Question in the system.
+
+*QuestionWrapper:* Helper class to wrap a collection of Question objects.
+
+*Quiz:* Entity class representing a Quiz which is composed of multiple Question objects.
+
+*Response:* Model class to encapsulate responses from the REST API
 
 ### 5. Advice
-QuestionErrorController: This class handles global exceptions and provides custom error responses for the application.
+*QuestionErrorController:* This class handles global exceptions and provides custom error responses for the application.
 
 ### 6. Exception
-QuestionNotFoundError: Custom exception class to handle cases where a requested Question is not found.
+*QuestionNotFoundError:* Custom exception class to handle cases where a requested Question is not found.
 
 ### Main Application
-BrainBusterApplication: The entry point of the application which boots the Spring Boot application.
+*BrainBusterApplication:* The entry point of the application which boots the Spring Boot application.
 
 ## APIS:
 
@@ -78,3 +87,9 @@ Retrieves the details of a quiz, including the questions, based on its unique ID
 Calculates the result of a quiz based on the user's responses. The correct answers are compared with the user-provided answers to determine the score.
 
 The QuizController leverages the IQuizService interface to orchestrate the business logic and data interactions required for managing quizzes.
+
+## What's Next
+The next phase of this project involves transitioning the current monolithic architecture to a microservices-based architecture. 
+
+This change will enable greater scalability, flexibility, and maintainability of the application.
+
